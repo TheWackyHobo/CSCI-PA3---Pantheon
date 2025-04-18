@@ -1,3 +1,15 @@
+#Instructions for Progamming assignment (example for 1Mpbs cubic) in pantheon directory
+1. Create Trace with: python2 tests/generate_trace.py 1 200 60 tests/1mbps_data.trace cp tests/1mbps_data.trace tests/1mbps_ack.trace
+2. change RTT_create.py sleep value to 0.2
+3. run- timeout 60s mm-link tests/1mbps_data.trace tests/1mbps_ack.trace --uplink-log=experiment_logs/1mbps_datalink.log --downlink-log=experiment_logs/1mbps_acklink.log -- python2 src/experiments/tunnel_manager.py --auto-test --scheme cubic --data-dir experiment_logs/1_cubic
+4. run- python2 tests/calculate_data.py experiment_logs/1mbps_datalink.log experiment_logs/rttevents.log experiment_logs/sent.log experiment_logs/recv.log to check values
+5. repeat for other schemes and networks, changing trace name accordingly
+6. cd to experiment_logs
+7. edit plot.py to have throughput_log to be 1mbps_datalink.log
+8. run- python2 plot.py
+
+
+
 # Pantheon of Congestion Control
 The Pantheon contains wrappers for many popular practical and research
 congestion control schemes. The Pantheon enables them to run on a common
